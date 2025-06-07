@@ -1,0 +1,85 @@
+html,body{
+    background-color: #F6F8FC;
+    width: 95%;
+    margin: 0 auto;
+    height: calc(100vh - 500px);
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    background-color: #0d6efd;
+    margin-bottom: 30px;
+}
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    background-color: #0b162a;
+    color: white;
+    margin-top: 30px;
+}
+.custom-input{
+    width: 60%;
+}
+.loadingoverlay{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlayhtml{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+.pokecard {
+    border-radius: 25px;
+    border: 1.5mm ridge black;
+    background-color: #F6F8FC;
+    text-align: center;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+.pokecard:hover{
+    transition: transform 0.3s ease;
+    transform: scale(1.15);
+    cursor: pointer;
+}
+.images {
+    height: 113px;
+    width: 120px;
+}
+.images:hover {
+  transition: transform 0.3s ease;
+  transform: scale(2.05);
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.statsrender{
+    border-radius: 25px;
+    border: 1.5mm ridge black;
+    background-color: #F6F8FC;
+    text-align: center;
+    color: black;
+    padding: 50px;
+}
+.overlaystats{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
