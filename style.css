@@ -4,6 +4,9 @@ html,body{
     margin: 0 auto;
     height: calc(100vh - 500px);
 }
+main{
+  height: calc(100vh - 500px);
+}
 header{
     display: flex;
     justify-content: center;
@@ -72,6 +75,9 @@ footer{
     text-align: center;
     color: black;
     padding: 50px;
+    padding-bottom: 20px;
+    cursor: default;
+    position: relative;
 }
 .overlaystats{
     background-color: rgba(0, 0, 0, 0.5);
@@ -82,4 +88,120 @@ footer{
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+.imagesoverlay{
+    height: 113px;
+    width: 120px;
+}
+
+.evolution-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.evo-box {
+  text-align: center;
+}
+
+.evo-box img {
+  width: 130px;
+  height: 130px;
+}
+
+.arrowevolution {
+  font-size: 24px;
+}
+
+.icons{
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+}
+
+.icon.x:hover svg circle,
+.icon.x:hover svg path {
+  fill: red;
+  transition: stroke 0.3s ease;
+}
+
+.icon.x {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.icon.x:hover svg {
+  transform: scale(1.1) scaleX(var(--flip, 1));
+  transition: transform 0.2s ease, stroke 0.3s ease;
+}
+
+.icon.arrow svg {
+  transform: scaleX(var(--flip, 1));
+}
+
+.icon.arrow svg path {
+  transition: fill 0.3s ease;
+}
+
+.icon.arrow:hover svg path {
+  fill: #000000;
+}
+
+.icon.arrow:hover svg .cls-1 {
+  fill: #0d6efd;
+}
+
+.icon.arrow:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+
+
+.arrow-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: stroke 0.2s ease;
+}
+
+.arrow:hover path {
+  stroke: blue;
+}
+
+.autocomplete-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.autocomplete-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.autocomplete-item:hover {
+    background-color: #f0f0f0;
+}
+
+.input-group {
+    position: relative;
 }
