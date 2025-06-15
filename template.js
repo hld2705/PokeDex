@@ -8,8 +8,11 @@ function loadingTemplate() {
   loop
   autoplay>
   </dotlottie-player>
+  <div>
+  <h1 style="margin-top:20px;">Page loading...</h1>
   </div>
-  <h1>Page loading...</h1>`
+  </div>
+  `
 
 }
 
@@ -76,7 +79,7 @@ function navigatingPokemon() {
           stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
  </div></div>
-                          <div style="display: flex; justify-content: center; gap: 500px;"><div class="icon arrow" style="--flip: 1;" onclick="navigationPoke('left')" id="arrowleft">
+                          <div class="arrowplacement"><div class="icon arrow" style="--flip: 1;" onclick="navigationPoke('left')" id="arrowleft">
   <svg width="60" height="60" viewBox="0 -9.55 119.78 119.78" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <style>.cls-1{fill:#ffffff;}</style>

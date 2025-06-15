@@ -2,27 +2,38 @@ html,body{
     background-color: #F6F8FC;
     width: 95%;
     margin: 0 auto;
-    height: calc(100vh - 500px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 main{
-  height: calc(100vh - 500px);
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 header{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px;
+    height: 200px;
     background-color: #0d6efd;
-    margin-bottom: 30px;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+    background-image: url("assets/img/pokemonheader.PNG");
+    object-fit: fill;
+    border-bottom: 1.5mm ridge black;
+    border-left: 1.5mm ridge black;
+    border-right: 1.5mm ridge black;
 }
 footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 250px;
+    height: 200px;
     background-color: #0b162a;
     color: white;
-    margin-top: 30px;
+    flex-shrink: 0;
+    margin-top: 20px;
 }
 .custom-input{
     width: 60%;
@@ -35,6 +46,8 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    color: white;
 }
 .overlayhtml{
     position: fixed;
@@ -204,4 +217,92 @@ footer{
 
 .input-group {
     position: relative;
+}
+.arrowplacement{
+    display: flex;
+    justify-content: center;
+    gap: 500px;
+}
+@media screen and (max-width: 320px) {
+    html, body {
+        width: 100%;
+    }
+    
+    .pokecard {
+        padding: 15px;
+        width: 90%;
+    }
+    
+    .statsrender {
+        padding: 10px;
+        width: 95%;
+        margin: 0 auto;
+    }
+    
+    .images {
+        height: 60px;
+        width: 60px;
+    }
+    
+    .custom-input {
+        width: 90%;
+    }
+    
+    .evolution-chain {
+        display: none;
+    }
+    
+    .evo-box img {
+        width: 80px;
+        height: 80px;
+    }
+    p{
+        margin: 0px;
+    }
+    .arrowplacement {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    margin-bottom: 20px;
+}
+    .footercontent{
+        padding: 30px;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+    .pokecard {
+        padding: 20px;
+        width: 90%;
+    }
+    
+    .statsrender {
+        padding: 15px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+    .custom-input {
+        width: 85%;
+    }
+    
+    .images {
+        height: 70px;
+        width: 70px;
+    }
+}
+
+@media screen and (min-height: 900px) {
+    main {
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .pokecard {
+        margin: 20px 0;
+    }
+    
+    .statsrender {
+        margin: 20px 0;
+    }
 }
