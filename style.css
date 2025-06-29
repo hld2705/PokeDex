@@ -1,31 +1,32 @@
-html,body{
+html,
+body {
     background-color: #F6F8FC;
-    width: 95%;
     margin: 0 auto;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
-main{
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-header{
+
+header {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 200px;
-    background-color: #0d6efd;
+    background-color: #000;
     flex-shrink: 0;
     margin-bottom: 20px;
     background-image: url("assets/img/pokemonheader.PNG");
-    object-fit: fill;
+    object-fit: contain;
     border-bottom: 1.5mm ridge black;
     border-left: 1.5mm ridge black;
     border-right: 1.5mm ridge black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-footer{
+
+footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,10 +36,23 @@ footer{
     flex-shrink: 0;
     margin-top: 20px;
 }
-.custom-input{
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.custom-input {
     width: 60%;
 }
-.loadingoverlay{
+
+.loadingoverlay {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     inset: 0;
@@ -49,11 +63,17 @@ footer{
     flex-direction: column;
     color: white;
 }
-.overlayhtml{
+
+.overlayhtml {
     position: fixed;
     inset: 0;
     z-index: 9999;
 }
+
+.buttonmore{
+
+}
+
 .pokecard {
     border-radius: 25px;
     border: 1.5mm ridge black;
@@ -65,23 +85,27 @@ footer{
     align-items: center;
     padding: 50px;
 }
-.pokecard:hover{
+
+.pokecard:hover {
     transition: transform 0.3s ease;
     transform: scale(1.15);
     cursor: pointer;
 }
+
 .images {
     height: 113px;
     width: 120px;
 }
+
 .images:hover {
-  transition: transform 0.3s ease;
-  transform: scale(2.05);
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
+    transition: transform 0.3s ease;
+    transform: scale(2.05);
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
 }
-.statsrender{
+
+.statsrender {
     border-radius: 25px;
     border: 1.5mm ridge black;
     background-color: #F6F8FC;
@@ -92,7 +116,8 @@ footer{
     cursor: default;
     position: relative;
 }
-.overlaystats{
+
+.overlaystats {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     inset: 0;
@@ -102,32 +127,33 @@ footer{
     align-items: center;
     cursor: pointer;
 }
-.imagesoverlay{
+
+.imagesoverlay {
     height: 113px;
     width: 120px;
 }
 
 .evolution-chain {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
 .evo-box {
-  text-align: center;
+    text-align: center;
 }
 
 .evo-box img {
-  width: 130px;
-  height: 130px;
+    width: 130px;
+    height: 130px;
 }
 
 .arrowevolution {
-  font-size: 24px;
+    font-size: 24px;
 }
 
-.icons{
+.icons {
     height: 60px;
     width: 60px;
     cursor: pointer;
@@ -135,59 +161,59 @@ footer{
 
 .icon.x:hover svg circle,
 .icon.x:hover svg path {
-  fill: red;
-  transition: stroke 0.3s ease;
+    fill: red;
+    transition: stroke 0.3s ease;
 }
 
 .icon.x {
-  cursor: pointer;
-  display: inline-block;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .icon.x:hover svg {
-  transform: scale(1.1) scaleX(var(--flip, 1));
-  transition: transform 0.2s ease, stroke 0.3s ease;
+    transform: scale(1.1) scaleX(var(--flip, 1));
+    transition: transform 0.2s ease, stroke 0.3s ease;
 }
 
 .icon.arrow svg {
-  transform: scaleX(var(--flip, 1));
+    transform: scaleX(var(--flip, 1));
 }
 
 .icon.arrow svg path {
-  transition: fill 0.3s ease;
+    transition: fill 0.3s ease;
 }
 
 .icon.arrow:hover svg path {
-  fill: #000000;
+    fill: #000000;
 }
 
 .icon.arrow:hover svg .cls-1 {
-  fill: #0d6efd;
+    fill: #0d6efd;
 }
 
 .icon.arrow:hover svg {
-  transform: scale(1.1);
-  transition: transform 0.2s ease;
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
 }
 
 
 
 .arrow-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
 }
 
 .arrow {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: stroke 0.2s ease;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: stroke 0.2s ease;
 }
 
 .arrow:hover path {
-  stroke: blue;
+    stroke: blue;
 }
 
 .autocomplete-container {
@@ -202,7 +228,7 @@ footer{
     overflow-y: auto;
     z-index: 1000;
     display: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .autocomplete-item {
@@ -218,74 +244,81 @@ footer{
 .input-group {
     position: relative;
 }
-.arrowplacement{
+
+.arrowplacement {
     display: flex;
     justify-content: center;
     gap: 500px;
 }
-@media screen and (max-width: 320px) {
-    html, body {
+
+@media screen and (min-width: 320px) and (max-width: 780px) {
+
+    html,
+    body {
         width: 100%;
     }
-    
+
     .pokecard {
         padding: 15px;
         width: 90%;
     }
-    
+
     .statsrender {
         padding: 10px;
         width: 95%;
         margin: 0 auto;
     }
-    
+
     .images {
         height: 60px;
         width: 60px;
     }
-    
+
     .custom-input {
         width: 90%;
     }
-    
+
     .evolution-chain {
         display: none;
     }
-    
+
     .evo-box img {
         width: 80px;
         height: 80px;
     }
-    p{
+
+    p {
         margin: 0px;
     }
+
     .arrowplacement {
-    display: flex;
-    justify-content: center;
-    gap: 150px;
-    margin-bottom: 20px;
-}
-    .footercontent{
+        display: flex;
+        justify-content: center;
+        gap: 150px;
+        margin-bottom: 20px;
+    }
+
+    .footercontent {
         padding: 30px;
     }
 }
 
-@media screen and (min-width: 321px) and (max-width: 768px) {
+@media screen and (min-width: 320px) and (max-width: 768px) {
     .pokecard {
         padding: 20px;
         width: 90%;
     }
-    
+
     .statsrender {
         padding: 15px;
         width: 90%;
         margin: 0 auto;
     }
-    
+
     .custom-input {
         width: 85%;
     }
-    
+
     .images {
         height: 70px;
         width: 70px;
@@ -297,11 +330,11 @@ footer{
         justify-content: center;
         align-items: center;
     }
-    
+
     .pokecard {
         margin: 20px 0;
     }
-    
+
     .statsrender {
         margin: 20px 0;
     }

@@ -16,31 +16,22 @@ function loadingTemplate() {
 
 }
 
-function pokemonRenderTemplate(data) {
-  let html = "";
-
-  for (let index = 0; index < data.length; index++) {
-    let p = data[index];
-    let typesHtml = p.type.map(t => {
-      let typeName = t.type.name;
-      let iconUrl = `https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${typeName}.svg`;
-      return `<img src="${iconUrl}" alt="${typeName}" title="${typeName}" style="width: 24px; height: 24px; margin-right: 4px; filter: drop-shadow(0 0 2px rgba(0,0,0,0.4));">`;
-    }).join("");
-
-    html += `
-  <div class="pokecard" onclick='renderPokeStats(${JSON.stringify(p)})' style="border-color: ${p.color};">
-    <div>
-      <h1>${p.name}</h1>
-      <img class="images" src="${p.image}" alt="${p.name}" />
-      <h3>Type: ${typesHtml}</h3>
-    </div>
-  </div>
-`;
-  }
-
-  return html;
+function renderButtonMoreTemplate() {
+  return `<button id="loadmorepokemons" class="btn btn-primary">Load more Pokemons</button>`;
 }
 
+
+function pokemonCardTemplateTemplate(p, types) {
+  return `
+    <div class="pokecard" onclick='renderPokeStats(${JSON.stringify(p)})' style="border-color:${p.color};">
+      <div>
+        <h1>${p.name}</h1>
+        <img class="images" src="${p.image}" alt="${p.name}" />
+        <h3>Type: ${types}</h3>
+      </div>
+    </div>
+  `;
+}
 function renderPokeStats(p) {
   let statsHtml = p.stats.map(s => `${s.stat.name}: ${s.base_stat}`).join(", ");
   let typesHtml = p.type.map(t => t.type.name).join(", ");

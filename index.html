@@ -19,20 +19,25 @@
     <header>
         <div class="searchbar">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" style="text-align: center;" placeholder="Search"
+                <input type="text" class="form-control" id="searchInput"
+                    style="text-align: center; border: 0.55mm ridge black;" placeholder="Search"
                     aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-light btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                <ul id="suggestionsList" class="list-group position-absolute w-100" style="z-index: 1000; top:100%;"></ul>
+                <button class="btn btn-light btn-outline-secondary" style="border: 0.55mm ridge black;" type="button"
+                    id="button-addon2">Button</button>
             </div>
         </div>
     </header>
 
     <main>
-        <div id="speciesrender" class="d-flex flex-wrap gap-3 justify-content-center mb-3">
+        <div id="speciesrender" class="d-flex flex-wrap gap-3 justify-content-center mb-4">
             <div class="overlayhtml" id="loadingscreen"></div>
         </div>
-
         <div id="statsrender"></div>
+        <div id="buttonmore"></div>
     </main>
+
+    <div id="loadingscreen"></div>
 
     <footer>
         <div class="footercontent">

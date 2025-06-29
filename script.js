@@ -1,4 +1,5 @@
 const BASIC_URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=9"
+
 const COLOR_MAP = {
   black: "#2c3e50",
   blue: "#2980b9",
@@ -15,6 +16,8 @@ const COLOR_MAP = {
 let currentPokemonIndex = 0;
 
 let pokemonArray = [];
+
+const POKEMON_LIMIT = 10;
 
 async function renderFunc(){
     loadingScreen();
@@ -74,13 +77,17 @@ async function renderPokemons(data){
   let pokemonRender = document.getElementById("speciesrender");
   await new Promise (resolve => setTimeout(resolve, 2100));
   pokemonRender.innerHTML = pokemonRenderTemplate(data);
+  let buttonRender = document.getElementById("buttonmore");
+  buttonRender.innerHTML = renderButtonMoreTemplate();
+  let loadMoreBtn = document.getElementById("loadmorepokemons");
+  loadMoreBtn.onclick = loadMorePokemons;
 }
 
 async function loadingScreen() {
   let loadingscreen = document.getElementById("loadingscreen");
   loadingscreen.innerHTML = loadingTemplate();
   await new Promise(resolve => setTimeout(resolve, 2000));
-  loadingscreen.remove();
+  loadingscreen.innerHTML = "";
 }
 
 function closeStatsRender(){
@@ -108,88 +115,80 @@ function navigationPoke(direction) {
 }
 
 function searchBar() {
-    const searchInput = document.querySelector('.form-control');
-    const searchButton = document.getElementById('button-addon2');
-    const autocompleteContainer = document.createElement('div');
-    autocompleteContainer.className = 'autocomplete-container';
-    searchInput.parentElement.appendChild(autocompleteContainer);
-    searchButton.addEventListener('click', () => {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        searchPokemon(searchTerm);
-        autocompleteContainer.style.display = 'none';
-    });
-    searchInput.addEventListener('input', (event) => {
-        const searchTerm = event.target.value.toLowerCase().trim();
-        if (!searchTerm) {
-            autocompleteContainer.style.display = 'none';
-            renderPokemons(pokemonArray);
-            return;
-        }
-        const matches = pokemonArray.filter(pokemon => 
-            pokemon.name.toLowerCase().includes(searchTerm)
-        );
-        if (matches.length > 0) {
-            autocompleteContainer.innerHTML = matches
-                .map(pokemon => `
-                    <div class="autocomplete-item" onclick="selectPokemon('${pokemon.name}')">
-                        ${pokemon.name}
-                    </div>
-                `)
-                .join('');
-            autocompleteContainer.style.display = 'block';
-        } else {
-            autocompleteContainer.style.display = 'none';
-        }
-        const filteredPokemon = pokemonArray.filter(pokemon => 
-            pokemon.name.toLowerCase().includes(searchTerm) ||
-            pokemon.type.some(type => type.type.name.toLowerCase().includes(searchTerm))
-        );
-        if (filteredPokemon.length === 0) {
-            const pokemonRender = document.getElementById("speciesrender");
-            pokemonRender.innerHTML = `
-                <div class="pokecard" style="width: 100%; text-align: center;">
-                    <h2>No Pokemon found matching "${searchTerm}"</h2>
-                    <p>Try searching by name or type</p>
-                </div>
-            `;
-        } else {
-            renderPokemons(filteredPokemon);
-        }
-    });
-    document.addEventListener('click', (event) => {
-        if (!searchInput.contains(event.target) && !autocompleteContainer.contains(event.target)) {
-            autocompleteContainer.style.display = 'none';
-        }
-    });
+  const input = document.getElementById("searchInput");
+  const suggestionsList = document.getElementById("suggestionsList");
+  const button = document.getElementById("button-addon2");
+
+  input.addEventListener("input", () => handleInput(input, suggestionsList));
+  button.addEventListener("click", () => handleSearch(input.value.trim()));
+  document.addEventListener("click", (e) => handleClickOutside(e, input, suggestionsList));
 }
 
-function selectPokemon(pokemonName) {
-    const searchInput = document.querySelector('.form-control');
-    searchInput.value = pokemonName;
-    searchPokemon(pokemonName);
-    document.querySelector('.autocomplete-container').style.display = 'none';
+function handleInput(input, suggestionsList) {
+  const search = input.value.toLowerCase();
+  suggestionsList.innerHTML = "";
+  if (!search) {
+    renderPokemons(pokemonArray);
+    document.getElementById("buttonmore").innerHTML = '';
+    return;}
+  const matches = pokemonArray.filter(p =>
+    p.name.toLowerCase().includes(search));
+  renderSuggestions(matches.slice(0, 5), input, suggestionsList);
 }
 
-function searchPokemon(searchTerm) {
-    if (!searchTerm) {
-        renderPokemons(pokemonArray);
-        return;
-    }
+function renderSuggestions(matches, input, suggestionsList) {
+  matches.forEach(match => {
+    const li = document.createElement("li");
+    li.className = "list-group-item list-group-item-action";
+    li.textContent = match.name;
+    li.onclick = () => {
+      input.value = match.name;
+      suggestionsList.innerHTML = "";
+    };
+    suggestionsList.appendChild(li);
+  });
+}
 
-    const filteredPokemon = pokemonArray.filter(pokemon => 
-        pokemon.name.toLowerCase().includes(searchTerm) ||
-        pokemon.type.some(type => type.type.name.toLowerCase().includes(searchTerm))
-    );
+function handleSearch(searchName) {
+  const result = pokemonArray.find(p => p.name.toLowerCase() === searchName);
+  const speciesRender = document.getElementById("speciesrender");
+  const buttonMore = document.getElementById("buttonmore");
 
-    if (filteredPokemon.length === 0) {
-        const pokemonRender = document.getElementById("speciesrender");
-        pokemonRender.innerHTML = `
-            <div class="pokecard" style="width: 100%; text-align: center;">
-                <h2>No Pokemon found matching "${searchTerm}"</h2>
-                <p>Try searching by name or type</p>
-            </div>
-        `;
-    } else {
-        renderPokemons(filteredPokemon);
-    }
+  if (result) {
+    speciesRender.innerHTML = pokemonRenderTemplate([result]);
+  } else {
+    speciesRender.innerHTML = `<h3>No Pokémon found.</h3>`;
+  }
+  buttonMore.innerHTML = "";
+}
+
+function handleClickOutside(e, input, suggestionsList) {
+  if (!suggestionsList.contains(e.target) && e.target !== input) {
+    suggestionsList.innerHTML = "";
+  }
+}
+
+function pokemonRenderTemplate(data) {
+  return data.map(p => {
+    const types = p.type.map(t => {
+      const name = t.type.name;
+      return `<img src="https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${name}.svg" alt="${name}" title="${name}" style="width:24px;height:24px;margin-right:4px;filter:drop-shadow(0 0 2px rgba(0,0,0,0.4));">`;
+    }).join("");
+    return pokemonCardTemplateTemplate(p, types);
+  }).join("");
+}
+
+async function loadMorePokemons() {
+  loadingScreen();
+  const url = `https://pokeapi.co/api/v2/pokemon?offset=${currentPokemonIndex}&limit=10`;
+  let response = await fetch(url);
+  let data = (await response.json()).results;
+
+  if (data.length === 0) {
+    document.getElementById("loadmorepokemons").style.display = "none";
+    return;
+  }
+  await pokemonLoad(data);
+  renderPokemons(pokemonArray);
+  currentPokemonIndex += 10;
 }
