@@ -10,12 +10,6 @@ A responsive Pokédex web application that fetches Pokémon data from an externa
 
 https://hld2705.github.io/PokeDex/
 
-## Preview
-
-Add a screenshot or GIF here.
-
----
-
 ## Features
 
 - Fetching data from a Pokémon API
